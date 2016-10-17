@@ -32,6 +32,7 @@ public class Mapeador {
             }
 
             mapa.put(interf, impl);
+            System.out.println("Teste de commit");
         }
 
     }
