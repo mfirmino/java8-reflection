@@ -1,7 +1,6 @@
-package br.com.alura.reflection.aula2;
+package br.com.alura.reflection.aula3;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +37,12 @@ public class Mapeador {
 
     public Class<?> getImplementacao(Class<?> interf) {
         return mapa.get(interf);
+    }
+
+    public <E> E getInstance(Class<E> interf)
+                    throws Exception {
+        Class<?> impl = mapa.get(interf);
+        return (E) impl.newInstance();
     }
 
 }
