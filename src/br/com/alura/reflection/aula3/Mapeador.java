@@ -2,6 +2,7 @@ package br.com.alura.reflection.aula3;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -43,6 +44,20 @@ public class Mapeador {
                     throws Exception {
         Class<?> impl = mapa.get(interf);
         return (E) impl.newInstance();
+    }
+
+    public <E> E getInstance(Class<E> interf, Object... params) throws Exception {
+        Class<?> impl = mapa.get(interf);
+
+        Class<?>[] tiposConstrutor = new Class<?>[params.length];
+
+        for (int i = 0; i<tiposConstrutor.length; i++) {
+            tiposConstrutor[i] = params[i].getClass();
+        }
+
+        Constructor<?> constructor = impl.getConstructor(tiposConstrutor);
+
+        return (E) constructor.newInstance(params);
     }
 
 }
